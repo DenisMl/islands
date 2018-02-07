@@ -17,6 +17,12 @@ html, body {
     border-bottom: 2px solid #3f6896;
 }
 
+.map-exposed {
+    display: inline-block;
+    box-shadow: 0 0 9px -3px black;
+    border-bottom: 2px solid #3f6896;
+}
+
 .map-row {
     height: 30px;
 }
@@ -29,18 +35,24 @@ html, body {
     position: relative;
 }
 
-.water-element {
+.water-sector {
     background-color: #3f6896;
     z-index: 1;
 }
 
-.island-element {
+.island-sector {
     background-color: #fbef90;
     z-index: 2;
     box-shadow: 0 2px 0 0 #988700;
 }
 
-.island-element:hover {
+.island-sector:hover {
     background-color: #dcd17b;
     box-shadow: inset 0 1px 2px 0 #988700;
+}
+
+.hidden-sector {
+    background-color: #50687d;
+    z-index: 2;
+    box-shadow: 0px 0px 1px 0px #fff8bc;
 }
