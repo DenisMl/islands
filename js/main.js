@@ -140,7 +140,10 @@ function getNextCoords(i, j, previ, prevj) {
   ].filter((coords) => {
     return (coords[0] !== previ && coords[1] !== prevj);
   });
-  // console.log(`nextCoords: `);
-  // console.log(nextCoords);
+  console.log(`~~~~~~~~~~~~~~~~~~~~~~~~`);
+  console.log(`curr: [${i}|${j}]`);
+  console.log(`prev: [${previ}|${prevj}]`);
+  console.log(`nextCoords: `);
+  console.dir(nextCoords);
   return nextCoords;
 }
