@@ -1,5 +1,7 @@
 let exposedMap = [];
 let islandsAmount = 0;
+let timeout = 0;
+const timeoutLength = 100;
 
 $(document).ready(function () {
   renderMap(map1, '#map-uncovered-1');
@@ -47,7 +49,8 @@ function islandSearch(map, selector) {
           islandsAmount++;
           discoverIsland(map, i, j, null, null, selector);
         } else {
-          drawWaterSector(i, j)
+          // debugger;
+          drawWaterSector(i, j, selector)
         }
       }
     }
@@ -83,9 +86,10 @@ function discoverIsland(map, i, j, previ, prevj, selector) {
         drawIslandSector(i, j, selector);
         let nextCoords = getNextCoords(i, j, previ, prevj);
         nextCoords.forEach((coord) => {
-          discoverIsland(map, coord[0], coord[1], i, j);
+          discoverIsland(map, coord[0], coord[1], i, j, selector);
         });
       } else {
+        // debugger;
         drawWaterSector(i, j, selector);
       }
     }
@@ -102,12 +106,18 @@ function sectorIsIsland(map, i, j) {
 
 function drawIslandSector(i, j, selector) {
   exposedMap[i][j] = 1;
-  renderIslandSector(i, j, selector);
+  setTimeout(function () {
+    renderIslandSector(i, j, selector);
+  }, timeout);
+  increaseTimeout();
 }
 
 function drawWaterSector(i, j, selector) {
   exposedMap[i][j] = 0;
-  renderWaterSector(i, j, selector);
+  setTimeout(function () {
+    renderWaterSector(i, j, selector);
+  }, timeout);
+  increaseTimeout();
 }
 
 function renderIslandSector(i, j, selector) {
@@ -118,6 +128,9 @@ function renderWaterSector(i, j, selector) {
   $(`${selector} .${i}-${j}`).removeClass('hidden-sector').addClass('water-sector');
 }
 
+function increaseTimeout() {
+  timeout += timeoutLength;
+}
 function getNextCoords(i, j, previ, prevj) {
   let nextCoords = [
     [i - 1, j],
